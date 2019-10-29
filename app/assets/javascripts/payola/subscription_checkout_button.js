@@ -18,7 +18,6 @@ var PayolaSubscriptionCheckout = {
           PayolaSubscriptionCheckout.submitForm(form.attr('action'), {
             stripe_customer_id: options.stripe_customer_id,
             coupon: options.coupon,
-            tax_percent: options.tax_percent,
             signed_custom_fields: options.signed_custom_fields || undefined
           }, options);
         } else {
@@ -29,7 +28,7 @@ var PayolaSubscriptionCheckout = {
               token: function(token) { PayolaSubscriptionCheckout.tokenHandler(token, options); },
               name: options.name,
               description: options.description,
-              amount: options.price+(options.price*(options.tax_percent/100)),
+              amount: options.price,
               panelLabel: options.panel_label,
               allowRememberMe: options.allow_remember_me,
               zipCode: options.verify_zip_code,

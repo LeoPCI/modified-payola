@@ -22,7 +22,6 @@ module Payola
         s.setup_fee = params[:setup_fee]
         s.quantity = params[:quantity]
         s.trial_end = params[:trial_end]
-        s.tax_percent = params[:tax_percent]
         s.stripe_customer_id = customer.id if customer
 
         s.owner = owner
