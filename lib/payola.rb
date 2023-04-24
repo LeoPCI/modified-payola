@@ -50,9 +50,11 @@ module Payola
     #   StripeEvent.subscribe(name, callable)
     # end
 
-    def subscribe(name, &block)
-      StripeEvent.subscribe(name, block)
-    end    
+    def subscribe(name, callable = nil, &block)
+      callable ||= block
+      StripeEvent.subscribe(name, callable)
+    end
+    
 
     def instrument(name, object)
       StripeEvent.backend.instrument(StripeEvent.namespace.call(name), object)
@@ -62,8 +64,9 @@ module Payola
     #   StripeEvent.all(callable)
     # end
 
-    def all(callable = &block)
-      StripeEvent.all(block)
+    def all(callable = nil, &block)
+      callable ||= block
+      StripeEvent.all(callable)
     end
 
     def queue!(klass, *args)
