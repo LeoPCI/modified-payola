@@ -1,6 +1,8 @@
 module Payola
   class InvoicePaid
-    include Payola::InvoiceBehavior
+    require_relative './invoice_behavior.rb'
+
+    # include Payola::InvoiceBehavior
 
     def self.call(event)
       sale, charge = create_sale_from_event(event)
