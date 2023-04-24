@@ -5,7 +5,7 @@ module Payola
     require_relative '../../app/helpers/payola/price_helper.rb'
     require_relative '../../app/services/payola/invoice_paid.rb'
     require_relative '../../app/services/payola/invoice_failed.rb'
-    require_relative '../../app/services/payola/sunc_subscription.rb'
+    require_relative '../../app/services/payola/sync_subscription.rb'
     require_relative '../../app/services/payola/subscription_deleted.rb'
 
     config.generators do |g|
