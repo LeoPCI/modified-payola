@@ -2,6 +2,7 @@ module Payola
   class Engine < ::Rails::Engine
     isolate_namespace Payola
     engine_name 'payola'
+    require_relative '../../app/helpers/payola/price_helper.rb'
 
     config.generators do |g|
       g.test_framework :rspec, fixture: false
