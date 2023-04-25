@@ -55,10 +55,10 @@ module Payola
     #   StripeEvent.subscribe(name, callable)
     # end
 
-    def subscribe(name, &block)
-      StripeEvent.subscribe(name) do |event|
-        block.call(event) if block_given?
-      end
+    def subscribe(name, callable = nil, &block)
+      callable ||= block
+      raise ArgumentError, "must provide a Proc or a block" unless callable.is_a?(Proc)
+      StripeEvent.subscribe(name, callable)
     end
 
     def instrument(name, object)
@@ -75,9 +75,9 @@ module Payola
     # end
 
     def all(callable = nil, &block)
-      StripeEvent.all(name) do |event|
-        block.call(event) if block_given?
-      end
+      callable ||= block
+      raise ArgumentError, "must provide a Proc or a block" unless callable.is_a?(Proc)
+      StripeEvent.all(callable)
     end
 
     def queue!(klass, *args)
