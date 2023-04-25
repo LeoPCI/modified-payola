@@ -35,7 +35,8 @@ module Payola
 
     def configure(&block)
       raise ArgumentError, "must provide a block" unless block_given?
-      block.arity.zero? ? instance_eval(&block) : yield(self)
+      # block.arity.zero? ? instance_eval(&block) : yield(self)
+      yield(self)
     end
 
     def secret_key_for_sale(sale)
