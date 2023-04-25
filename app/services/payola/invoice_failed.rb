@@ -15,5 +15,9 @@ module Payola
 
       sale
     end
+
+    def self.to_proc
+      Proc.new { |event| self.call(event) }
+    end
   end
 end

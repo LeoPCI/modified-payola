@@ -7,5 +7,9 @@ module Payola
 
       sub.cancel! if sub.may_cancel?
     end
+
+    def self.to_proc
+      Proc.new { |event| self.call(event) }
+    end
   end
 end

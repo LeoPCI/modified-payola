@@ -7,5 +7,9 @@ module Payola
 
       sub.sync_with!(stripe_sub)
     end
+
+    def self.to_proc
+      Proc.new { |event| self.call(event) }
+    end
   end
 end
