@@ -1,6 +1,7 @@
 module Payola
   class CreateSubscription
-    def self.call(options = {}, owner: nil)
+    def self.call(options = {})
+      owner = options[:owner] || nil
       plan = options[:plan]
       affiliate = options[:affiliate]
 
