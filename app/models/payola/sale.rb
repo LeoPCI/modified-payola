@@ -12,10 +12,16 @@ module Payola
     validates_presence_of :stripe_token
     validates_presence_of :currency
 
+    # belongs_to :product, Rails::VERSION::MAJOR > 4 ? { polymorphic: true, optional: true } : { polymorphic: true }
+    # belongs_to :owner, Rails::VERSION::MAJOR > 4 ? { polymorphic: true, optional: true } : { polymorphic: true }
+    # belongs_to :coupon, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+    # belongs_to :affiliate, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+
     belongs_to :product, Rails::VERSION::MAJOR > 4 ? { polymorphic: true, optional: true } : { polymorphic: true }
     belongs_to :owner, Rails::VERSION::MAJOR > 4 ? { polymorphic: true, optional: true } : { polymorphic: true }
     belongs_to :coupon, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
     belongs_to :affiliate, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+    
 
     include AASM
 
