@@ -57,7 +57,13 @@ module Payola
 
     def subscribe(name, callable = nil, &block)
       callable ||= block
-      raise ArgumentError, "must provide a Proc or a block" unless callable.is_a?(Proc)
+      if callable.nil?
+        raise ArgumentError, "must provide a callable object"
+      elsif callable.is_a?(Symbol)
+        callable = callable.to_proc
+      elsif !callable.is_a?(Proc)
+        raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
+      end
       StripeEvent.subscribe(name, callable)
     end
 
@@ -76,7 +82,13 @@ module Payola
 
     def all(callable = nil, &block)
       callable ||= block
-      raise ArgumentError, "must provide a Proc or a block" unless callable.is_a?(Proc)
+      if callable.nil?
+        raise ArgumentError, "must provide a callable object"
+      elsif callable.is_a?(Symbol)
+        callable = callable.to_proc
+      elsif !callable.is_a?(Proc)
+        raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
+      end
       StripeEvent.all(callable)
     end
 
