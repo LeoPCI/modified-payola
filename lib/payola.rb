@@ -34,8 +34,8 @@ module Payola
       :create_stripe_plans
 
     def configure(&block)
-      # raise ArgumentError, "must provide a block" unless block_given?
-      block.arity.zero? ? instance_eval(&block) : yield(self)
+      raise ArgumentError, "must provide a block" unless block_given?
+      # block.arity.zero? ? instance_eval(&block) : yield(self)
       yield(self)
     end
 
@@ -47,51 +47,51 @@ module Payola
       return publishable_key_retriever.call(sale).to_s
     end
 
-    def subscribe(name, callable = Proc.new)
+    # def subscribe(name, callable = Proc.new)
+    #   StripeEvent.subscribe(name, callable)
+    # end
+
+    # def subscribe(name, callable = nil, &block)
+    #   callable ||= block
+    #   StripeEvent.subscribe(name, callable)
+    # end
+
+    def subscribe(name, callable = nil, &block)
+      callable ||= block
+      if callable.nil?
+        raise ArgumentError, "must provide a callable object"
+      elsif callable.is_a?(Symbol)
+        callable = callable.to_proc
+      elsif !callable.is_a?(Proc)
+        raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
+      end
       StripeEvent.subscribe(name, callable)
     end
 
-    # def subscribe(name, callable = nil, &block)
-    #   callable ||= block
-    #   StripeEvent.subscribe(name, callable)
-    # end
-
-    # def subscribe(name, callable = nil, &block)
-    #   callable ||= block
-    #   if callable.nil?
-    #     raise ArgumentError, "must provide a callable object"
-    #   elsif callable.is_a?(Symbol)
-    #     callable = callable.to_proc
-    #   elsif !callable.is_a?(Proc)
-    #     raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
-    #   end
-    #   StripeEvent.subscribe(name, callable)
-    # end
-
-    # def instrument(name, object)
-    #   StripeEvent.backend.instrument(StripeEvent.namespace.call(name), object)
-    # end
-
-    def all(callable = Proc.new)
-      StripeEvent.all(callable)
+    def instrument(name, object)
+      StripeEvent.backend.instrument(StripeEvent.namespace.call(name), object)
     end
 
-    # def all(callable = nil, &block)
-    #   callable ||= block
+    # def all(callable = Proc.new)
     #   StripeEvent.all(callable)
     # end
 
     # def all(callable = nil, &block)
     #   callable ||= block
-    #   if callable.nil?
-    #     raise ArgumentError, "must provide a callable object"
-    #   elsif callable.is_a?(Symbol)
-    #     callable = callable.to_proc
-    #   elsif !callable.is_a?(Proc)
-    #     raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
-    #   end
     #   StripeEvent.all(callable)
     # end
+
+    def all(callable = nil, &block)
+      callable ||= block
+      if callable.nil?
+        raise ArgumentError, "must provide a callable object"
+      elsif callable.is_a?(Symbol)
+        callable = callable.to_proc
+      elsif !callable.is_a?(Proc)
+        raise ArgumentError, "callable object must be a Proc, a Symbol or nil"
+      end
+      StripeEvent.all(callable)
+    end
 
     def queue!(klass, *args)
       if background_worker.is_a? Symbol
