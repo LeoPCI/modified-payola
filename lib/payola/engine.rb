@@ -35,10 +35,10 @@ module Payola
 
     initializer :configure_subscription_listeners do |app|
       Payola.configure do |config|
-        config.subscribe 'invoice.payment_succeeded',     Payola::InvoicePaid.to_proc
-        config.subscribe 'invoice.payment_failed',        Payola::InvoiceFailed.to_proc
-        config.subscribe 'customer.subscription.updated', Payola::SyncSubscription.to_proc
-        config.subscribe 'customer.subscription.deleted', Payola::SubscriptionDeleted.to_proc
+        config.subscribe 'invoice.payment_succeeded',     Payola::InvoicePaid#.to_proc
+        config.subscribe 'invoice.payment_failed',        Payola::InvoiceFailed#.to_proc
+        config.subscribe 'customer.subscription.updated', Payola::SyncSubscription#.to_proc
+        config.subscribe 'customer.subscription.deleted', Payola::SubscriptionDeleted#.to_proc
       end
     end
   end
