@@ -34,8 +34,8 @@ module Payola
       :create_stripe_plans
 
     def configure(&block)
-      raise ArgumentError, "must provide a block" unless block_given?
-      # block.arity.zero? ? instance_eval(&block) : yield(self)
+      # raise ArgumentError, "must provide a block" unless block_given?
+      block.arity.zero? ? instance_eval(&block) : yield(self)
       yield(self)
     end
 
