@@ -1,4 +1,4 @@
-class CreatePayolaSales < ActiveRecord::Migration[7.0.4]
+class CreatePayolaSales < ActiveRecord::Migration[7.0]
   def change
     create_table :payola_sales do |t|
       t.string   "email",         limit: 191

@@ -1,4 +1,4 @@
-class CreatePayolaSubscriptions < ActiveRecord::Migration[7.0.4]
+class CreatePayolaSubscriptions < ActiveRecord::Migration[7.0]
   def change
     create_table :payola_subscriptions do |t|
       t.string :plan_type

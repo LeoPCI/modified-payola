@@ -1,4 +1,4 @@
-class AddActiveToPayolaCoupon < ActiveRecord::Migration[7.0.4]
+class AddActiveToPayolaCoupon < ActiveRecord::Migration[7.0]
   def change
     add_column :payola_coupons, :active, :boolean, default: true
   end
