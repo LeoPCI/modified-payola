@@ -1,4 +1,4 @@
-class CreatePayolaAffiliates < ActiveRecord::Migration[4.2]
+class CreatePayolaAffiliates < ActiveRecord::Migration[7.0.4]
   def change
     create_table :payola_affiliates do |t|
       t.string :code

@@ -1,4 +1,4 @@
-class AddAffiliateIdToPayolaSubscriptions < ActiveRecord::Migration[4.2]
+class AddAffiliateIdToPayolaSubscriptions < ActiveRecord::Migration[7.0.4]
   def change
     add_column :payola_subscriptions, :affiliate_id, :integer
   end
