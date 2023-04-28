@@ -21,8 +21,10 @@ module Payola
     belongs_to :product, polymorphic: true, optional: true
     # belongs_to :owner, Rails::VERSION::MAJOR > 4 ? { polymorphic: true, optional: true } : { polymorphic: true }
     belongs_to :owner, polymorphic: true, optional: true
-    belongs_to :coupon, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
-    belongs_to :affiliate, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+    # belongs_to :coupon, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+    belongs_to :coupon, optional: true
+    # belongs_to :affiliate, Rails::VERSION::MAJOR > 4 ? { optional: true } : {}
+    belongs_to :affiliate, optional: true
     
 
     include AASM
